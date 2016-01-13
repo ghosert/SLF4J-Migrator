@@ -15,8 +15,8 @@ This is a Python script which allows you to migrate Jakarta Commons Logging & Lo
 **2. log instance will be created with SLF4J**
 
 ```java
--private final static Logger log = Logger.getLogger(StubhubUserSessionFilter.class);
-+private final static Logger log = LoggerFactory.getLogger(StubhubUserSessionFilter.class);
+-private final static Logger log = Logger.getLogger(UserSessionFilter.class);
++private final static Logger log = LoggerFactory.getLogger(UserSessionFilter.class);
 ```
 
 **3. log clause will be standard SLF4J placeholder based instead of string conjunction**
