@@ -54,14 +54,13 @@ def handle_parameter_string(parameter_string):
             return parameter_string
     
 def handle_finding(finding):
-    # print
-    # print finding.group(0)
+    # print(finding.group(0))
     variable = finding.group(1)
     debug_level = finding.group(2)
     parameter_string = finding.group(3)
     parameter_string = handle_parameter_string(parameter_string)
     handled_debug_clause = '{0}.{1}({2});'.format(variable, debug_level, parameter_string)
-    # print handled_debug_clause
+    # print(handled_debug_clause)
     return handled_debug_clause
         
 def log4j_handler(pre_log, content, filename):
@@ -90,8 +89,7 @@ def log4j_handler(pre_log, content, filename):
     content = re.sub(r'({0})'.format(pre_log) + r'\.(debug|info|warn|error|fatal)\((.*?)\);', handle_finding, content, flags = re.DOTALL)
     content = re.sub(pre_log + r'\.fatal\(', pre_log + r'.error(', content, flags = re.DOTALL)
     if re.search(r'LogSF\.(debug|info|warn|error|fatal)\(', content):
-        print 'LogSF in this file fail to clean completely, check it: {0}'.format(filename)
-        print
+        print('LogSF in this file fail to clean completely, check it: {0}'.format(filename))
         # return None means no changes.
         return None
     return content
@@ -123,8 +121,8 @@ def handler(filename):
     # NOTICE jiawzhang: Uncomment this check if you want to mannually fix the issue, you could fix the issue by running 'mvn clean install -DskipTests'
     #pre_matches = re.search(r'\.(debug|info|warn|error|fatal)\(([^"]*?)\);', content, flags = re.DOTALL)
     #if pre_matches:
-    #    print pre_matches.group(0)
-    #    print 'manually check this file to see why there is no "" in debug/info/warn/error/fatal clause: {0}'.format(filename)
+    #    print(pre_matches.group(0))
+    #    print('manually check this file to see why there is no "" in debug/info/warn/error/fatal clause: {0}'.format(filename))
     #    return
 
         
@@ -180,9 +178,8 @@ def handler(filename):
 
         failed_matches = check_changes_failed(content)
         if failed_matches:
-            print failed_matches.group(0)
-            print 'manually check this file to see whether all the + in log clause has been cleaned or not: {0}'.format(filename)
-            print
+            print(failed_matches.group(0))
+            print('manually check this file to see whether all the + in log clause has been cleaned or not: {0}'.format(filename))
         
     # Write to file
     if file_content != content:
@@ -197,9 +194,9 @@ if __name__ == '__main__':
                 filename = root + os.sep + file
                 if re.search(r'\.java$', filename):
                     try:
-                        # print 'handling {0}'.format(filename)
+                        # print('handling {0}'.format(filename))
                         handler(filename)
                     except Exception as e:
-                        print 'error happens when handling file {0}'.format(filename)
-                        print traceback.format_exc()
+                        print('error happens when handling file {0}'.format(filename))
+                        print(traceback.format_exc())
             
