@@ -2,6 +2,10 @@
 
 This is a Python script which allows you to migrate Jakarta Commons Logging & Log4j in your Java source code to SLF4J Logging.
 
+## Python version compatibility
+
+Code has been updated to be compatible with Python 3.x
+
 ## What will be changed after running this migrator ?
 
 **1. "import" clause will be replaced with SLF4J**
